@@ -11,10 +11,12 @@ public function __construct()
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->view('_header.php');
 }
 	public function index()
 	{
 		$data['services']=$this->s->get_all();
+
 		$this->load->view('services/index', $data, FALSE);
 
 
