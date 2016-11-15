@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Accueils extends CI_Controller {
+class Services extends CI_Controller {
 public function __construct()
 {
 	parent::__construct();
@@ -10,10 +10,17 @@ public function __construct()
 
 	public function index()
 	{
-		var_dump($this->s->get_all());
-
+		$data['services']=$this->s->get_all();
+		$data['titre']='listes des services';
+		$this->load->view('services/index', $data);
 
 	}
+
+public function  show($id){
+$data['service']= $this->s->get($id);
+$this->load->view('services/show', $data, FALSE);
+
+}
 
 public function add(){
 
@@ -27,7 +34,7 @@ function update (){
 
 }
 
-function new(){
+function news(){
 
 }
 
