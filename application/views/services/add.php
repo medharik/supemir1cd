@@ -3,5 +3,5 @@
 <input type="text" name="designation" placeholder="désignation">
 <input type="text" name="prix" placeholder="prix">
 <input type="text" name="unite" placeholder="unite">
-<input type="submit" name="ok" value="Ajouter">
+<input type="submit" name="ok" value="Ajouter" class="btn btn-primary">
 </form>
