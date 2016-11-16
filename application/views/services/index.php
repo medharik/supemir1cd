@@ -11,7 +11,7 @@
 	
 ?>
 	<tr><td><?=$s->designation?></td><td><?=$s->prix?></td><td><?=$s->unite?></td><td><a href="<?php echo site_url('services/delete/'.$s->id) ;?>" class="btn btn-danger">Supprimer</a> | <a href="<?php echo site_url('services/update/'.$s->id );?>" class="btn btn-warning">Modifier</a> | <a href="<?php echo site_url( 'services/'.$s->id) ;?>" class="btn btn-info">Voir</a></td></tr>
-
+  
 <?php } ?>
 
 </table>
