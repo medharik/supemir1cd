@@ -88,30 +88,16 @@ $data=array('designation'=>$this->input->post('designation'),
 		
 		$this->form_validation->set_rules('prix', 'Prix', 'trim|required|min_length[1]|max_length[12]');
 	if ($this->form_validation->run() == TRUE) {
-		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']  = '100';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
-		$this->load->library('upload', $config);
-
-	if ($this->upload->do_upload('photo')) {
 		
-		$data['photo']=$this->upload->data('file_name');
-	}else{
-		$data['error']=$this->upload->display_errors();
-
-		$this->load->view('services/add', $data, FALSE);
-	}
 
 //$data=$this->input->post(NULL,TRUE);
 $data=array('designation'=>$this->input->post('designation'),
 	'prix'=>$this->input->post('prix'),
-	'photo'=>'uploads/'.$this->upload->data('file_name'),
+	//'photo'=>'uploads/'.$this->upload->data('file_name'),
 	'unite'=>$this->input->post('unite'),);
 		$this->s->update($id,$data);
 		$this->session->set_flashdata('message', 'service modifié avec succès');
-	//	redirect('services/index','refresh');
+	redirect('services/index','refresh');
 	} else {
 	$data['e']='block';
 	$this->form_validation->set_error_delimiters("<div class='alert alert-danger'>","</div>");
