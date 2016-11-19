@@ -10,7 +10,11 @@
 <?php foreach ($services as $s) {
 	
 ?>
-	<tr><td><?=$s->designation?></td><td><?=$s->prix?></td><td><?=$s->unite?></td><td><a href="<?php echo site_url('services/delete/'.$s->id) ;?>" class="btn btn-danger">Supprimer</a> | <a href="<?php echo site_url('services/update/'.$s->id );?>" class="btn btn-warning">Modifier</a> | <a href="<?php echo site_url( 'services/'.$s->id) ;?>" class="btn btn-info">Voir</a></td></tr>
+	<tr><td><?php if(!empty($s->photo) ) {?> 
+<img src='<?=site_url($s->photo); ?>' width='100'>
+<?php }?>
+
+		<?=$s->designation?></td><td><?=$s->prix?></td><td><?=$s->unite?></td><td><a href="<?php echo site_url('services/delete/'.$s->id) ;?>" class="btn btn-danger">Supprimer</a> | <a href="<?php echo site_url('services/update/'.$s->id );?>" class="btn btn-warning">Modifier</a> | <a href="<?php echo site_url( 'services/'.$s->id) ;?>" class="btn btn-info">Voir</a></td></tr>
   
 <?php } ?>
 
