@@ -10,18 +10,18 @@ public function __construct()
 		$this->load->database();
 	}	
 
-	public function insert($object)
+	public function insert($data=array())
 	{
-		$this->db->insert('service', $object);
+		$this->db->insert('service', $data);
 		return $this->db->insert_id();
 		
 	}
-	public function update($id,$object)
+	public function update($id,$data=array())
 	{
 		$this->db->where('id',$id)
-		->update('service', $object);
+		->update('service', $data);
 
-		
+	return 	$this->db->affected_rows();
 	}
 	public function delete($id)
 	{ $this->db->where('id',$id)
