@@ -54,6 +54,8 @@ $route['s/(\d+)'] = 'services/show/$1';
 $route['s/(\d+)/delete'] = 'services/delete/$1';
 $route['s/(\d+)/edit'] = 'services/edit/$1';
 $route['s/new'] = 'services/news';
+$route['s'] = 'services';
+
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

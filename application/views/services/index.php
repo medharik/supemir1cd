@@ -4,6 +4,7 @@
 	<title><?php echo $titre?></title>
 </head>
 <body>
+<div style="background: green;padding: 10px;text-align: center;color: white;display: inline"><?php $this->session->flashdata('message');?></div>
 <div>
 	<a href="<?=site_url('s/new')?>">Nouveau</a>
 
