@@ -52,12 +52,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'services';
 $route['s/(\d+)'] = 'services/show/$1';
 $route['s/(\d+)/delete'] =function($id){
-	if ( $id!=0) {
+
+if(!empty($id) && $id!=0){
 	return "services/delete/".$id;
-	}else{
+}else{
+
 return "services/delete/0";
-	
-	}
+
+}
+
 };
 $route['s/(\d+)/edit'] = 'services/edit/$1';
 $route['s/new'] = 'services/news';

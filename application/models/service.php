@@ -12,12 +12,13 @@ public function __construct()
 }
 
 public function get_all(){
-return $this->db->select('*')
+
+					return $this->db->select('*')
 				 ->from('service')
-				 ->order_by('id','desc')
+								 
 				 ->get()
 				 ->result();
-}
+				}
 public function insert($data=array()){
 $this->db->insert('service',$data);
 return $this->db->insert_id();
@@ -52,6 +53,20 @@ public function get_by($where){
 
 }
 
+public function get_by_page($nb,$debut){
+
+	return $this->db->select('*')
+			  ->where($where)
+			  ->from('service')
+			  ->limit($nb,$debut)
+			  ->get()
+			  ->result();
+
+
+}
+ function count_all(){
+ 	return $this->db->count_all_results('service');
+ }
 
 	
 

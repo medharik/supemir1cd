@@ -8,6 +8,6 @@ echo form_open_multipart(('services/update'),array('class'=>'fo'),array('id'=>$s
 <input type="text" name="designation" placeholder="désignation" value="<?=$service->designation?>">
 <input type="text" name="prix" placeholder="prix" value="<?=$service->prix?>">
 <input type="text" name="unite" placeholder="unite" value="<?=$service->unite?>">
-<input type="file" name="photo"> <img src="<?=site_url('uploads/'.$service->photo)?>">
+
 <input type="submit" name="ok" value="Modifier" class="btn btn-primary">
 </form>
