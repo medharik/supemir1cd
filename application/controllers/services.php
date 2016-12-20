@@ -2,6 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Services extends CI_Controller {
+	public $css=array();
+	public $js=array();
+	public $entete=array();
 public function __construct()
 {
 	parent::__construct();
@@ -10,15 +13,56 @@ public function __construct()
 	$this->load->library('form_validation');
 	$this->load->model('service','s');
 	//$this->load->library('session');
+$this->entete=array("photo"=>"<img src=''>","designation"=>'désignation','prix'=>'prix','unite'=>'unité','operation'=>'<a href=\"http://localhost/supemir1/s/25/delete\" onclick=\"return confirm(\'voulez vous vrm supprimer cet élément?\')\" class=\"btn btn-danger\">Supprimer</a>
+<a href=\"http://localhost/supemir1/s/25/edit \" class=\"btn btn-warning\">Modifier</a>
+			<a href=\"http://localhost/supemir1/s/25\" class=\"btn btn-success\">Consulter</a>');
+	//css
+$this->css=array('bootstrap.min.css','jquerydatatables.min.css');
+$this->js=array('jquery.min.js','jquerydatatables.min.js','bootstrap.min.js');
+	//fin css
 $this->output->enable_profiler(TRUE);
 }
-public function index()
+public function index($debut=0)
 	{
-			
+		$this->load->library('pagination');
+		
+		$config['base_url'] = site_url('services/index');
+		$total=$config['total_rows'] = $this->s->count_all();
+		$nb=$config['per_page'] = 4;
+		$config['num_links'] = $total/4 -1;	
+		$config['full_tag_open'] = '<p>';
+		$config['full_tag_close'] = '</p>';
+		$config['first_link'] = 'Début';
+		$config['first_tag_open'] = '<span>';
+		$config['first_tag_close'] = '</span>';
+		$config['last_link'] = 'Fin';
+		$config['last_tag_open'] = '<span>';
+		$config['last_tag_close'] = '</span>';
+		$config['next_link'] = 'Suivant';
+		$config['next_tag_open'] = '<span>';
+		$config['next_tag_close'] = '</span>';
+		$config['prev_link'] = 'Précédant';
+		$config['prev_tag_open'] = '<span>';
+		$config['prev_tag_close'] = '</span>';
+		$config['cur_tag_open'] = '<b>';
+		$config['cur_tag_close'] = '</b>';
+		$config['attributes'] = array('class'=>'pages');
+		
+		
 
-$data['services']=$this->s->get_all();
-		$data['titre']='listes des  services';
-		$data['nombre_services']="";
+		$this->pagination->initialize($config);
+		
+		$data['pages']= $this->pagination->create_links();
+			
+$data['css']=$this->css;
+
+$data['js']=$this->js;
+if(empty($nb)) $nb=0;
+if(empty($debut)) $debut=0;
+
+$data['services']=$this->s->get_all($nb,$debut);
+		$data['titre']='listes des  '.$total.' services';
+		$data['nombre_services']=$total;
 		$this->load->view('services/index', $data);
 	}
 public function  show($id){
@@ -36,7 +80,7 @@ public function create(){
 	$this->form_validation->set_rules('designation', 'désignation', 'trim|required');
 	$this->form_validation->set_rules('prix', 'Prix', 'trim|required|is_numeric');
 
-$this->form_validation->set_error_delimiters("<div style='color:red;text-align:center'>","</>");
+$this->form_validation->set_error_delimiters("<span style='color:red;text-align:center'>","</>");
 
 if ($this->form_validation->run() == TRUE ) {
 //upload
@@ -113,6 +157,18 @@ $this->s->update($id,$service);
 $this->session->set_flashdata('message', 'Service modifié '.strip_tags($service['designation']).' avec succès');
 redirect('s/','refresh');
 }
+
+
+function datatable()
+    {
+    	$this->load->library('datatables');
+        $this->datatables->select('designation,prix,unite')
+          
+            ->from('service');
+ 
+        echo $this->datatables->generate();
+    }
+
 }
 
 /* End of file accueils.php */
