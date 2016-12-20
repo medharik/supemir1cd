@@ -14,7 +14,8 @@ public function __construct()
 
 public function get_all($nb,$debut){
 
-				return $this->db->select('*')
+				return 
+				$this->db->select('*')
 				 ->from($this->table)
 				 -> limit($nb,$debut)								 
 				 ->get()

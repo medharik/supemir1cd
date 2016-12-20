@@ -48,7 +48,7 @@ public function index($debut=0)
 		$config['cur_tag_close'] = '</b>';
 		$config['attributes'] = array('class'=>'pages');
 		
-		
+	//	$this->output->delete_cache();
 
 		$this->pagination->initialize($config);
 		
