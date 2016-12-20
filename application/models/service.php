@@ -35,8 +35,13 @@ public function __construct()
 		return $r[0];
 		
 	}
-	public function get_all()
-	{return $this->db->get('service')->result();
+	public function get_all($npage,$offset)
+	{
+		return $this->db
+		->from('service')
+		->limit($npage,$offset)
+		->get()
+		->result();
 		
 	}
 	public function get_by($where=array())
@@ -45,6 +50,12 @@ public function __construct()
 		return $this->db->select('*')->from('service')->where($where)->get()->result();
 	}else 
 		return $this->db->select('*')->from('service')->where($where)->get()->result();
+	}
+
+
+	public function count_all(){
+return $this->db->count_all_results('service');
+
 	}
 
 }

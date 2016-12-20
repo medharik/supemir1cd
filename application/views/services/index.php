@@ -19,3 +19,7 @@
 <?php } ?>
 
 </table>
+<div class="pagination">
+	<?=$pages;?>
+
+</div>

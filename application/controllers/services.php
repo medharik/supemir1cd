@@ -15,10 +15,25 @@ public function __construct()
 		$this->load->view('_header.php');
 		$this->output->enable_profiler(TRUE);
 }
-	public function index()
+	public function index($npage=0)
 	{
-	//$this->output->delete_cache();
-		$data['services']=$this->s->get_all();
+
+$this->load->library('pagination');
+
+$config['base_url'] = base_url().'services/index';
+$config['total_rows'] = $this->s->count_all();
+$config['per_page'] = 4;
+$config['num_links'] = 3;
+
+
+$this->pagination->initialize($config);
+
+$data['pages']= $this->pagination->create_links();
+
+$data['services']=$this->s->get_all($npage,$config['per_page']);
+
+	
+		
 
 		$this->load->view('services/index', $data, FALSE);
 
