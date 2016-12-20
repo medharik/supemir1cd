@@ -37,13 +37,7 @@ public function __construct()
 	}
 	public function get_all($npage,$offset)
 	{
-		return $this->db
-		->select('*')
-		->from('service')
-		->limit(0,10)
-		->get()
-		->result();
-
+		return   $this->db->get_where('service',  0, 10);
 			
 		
 	}

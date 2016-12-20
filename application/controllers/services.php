@@ -30,7 +30,7 @@ $this->pagination->initialize($config);
 
 $data['pages']= $this->pagination->create_links();
 
-$data['services']=$this->s->get_all($npage,$config['per_page']);
+$data['services']=$this->s->get_all(0,10);
 
 	
 		
