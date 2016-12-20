@@ -38,10 +38,13 @@ public function __construct()
 	public function get_all($npage,$offset)
 	{
 		return $this->db
+		->select('*')
 		->from('service')
-		->limit($npage,$offset)
+		->limit(0,10)
 		->get()
 		->result();
+
+			
 		
 	}
 	public function get_by($where=array())
