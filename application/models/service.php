@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Service extends CI_Model {
 
+   // public $has_many = array( 'service_bcs' => array( 'model' => 'service_bc' ) );
 
 public function __construct()
 	{
@@ -37,7 +38,11 @@ public function __construct()
 	}
 	public function get_all($npage,$offset)
 	{
-		return   $this->db->get_where('service',  0, 10);
+		return   $this->db
+					->select('*')->from('service')
+					->limit($npage,$offset)
+					->get()
+					->result();
 			
 		
 	}

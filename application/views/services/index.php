@@ -1,4 +1,39 @@
+<style type="text/css">
+	.pagination a{
+padding: 10px;
+color: red;
+font-size: 1.2em;
 
+	}
+	.pagination{
+width: 100%;
+min-height: 50px;
+line-height: 50px;
+text-align: center;
+background: white;
+	}
+.cl{
+margin: 4px;
+color: white !important;
+
+}
+.pagination b {
+background: green;
+color: white;
+padding: 5px 10px;
+font-size: 12px;
+line-height: 1.5;
+border-radius: 3px;
+
+
+}
+</style>
+<?php foreach ($js as $c): ?>
+	<?=js($c)?>
+<?php endforeach ?>
+<?php foreach ($css as $c): ?>
+	<?=css($c)?>
+<?php endforeach ?>
 <div class="alert alert-info" style="display:<?php if($this->session->flashdata('message')) echo "block";else echo 'none'?>">
 <?=$this->session->flashdata('message');?>
 </div>
@@ -19,7 +54,7 @@
 <?php } ?>
 
 </table>
-<div class="pagination">
+<div class="pagination" align="center">
 	<?=$pages;?>
 
 </div>

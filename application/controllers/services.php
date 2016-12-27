@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Services extends CI_Controller {
-
+public $css, $js;
 public function __construct()
 {
 	parent::__construct();
@@ -14,6 +14,8 @@ public function __construct()
 		$this->load->library('form_validation');
 		$this->load->view('_header.php');
 		$this->output->enable_profiler(TRUE);
+$this->css=array('bootstrap.min.css','bootstrap-theme.min.css');
+$this->js=array('jquery.min.js','bootstrap.min.js');
 }
 	public function index($npage=0)
 	{
@@ -23,16 +25,31 @@ $this->load->library('pagination');
 $config['base_url'] = base_url().'services/index';
 $config['total_rows'] = $this->s->count_all();
 $config['per_page'] = 4;
-$config['num_links'] = 3;
-
-
+$config['num_links'] = 2;
+$config['full_tag_open'] = '<p>';
+		$config['full_tag_close'] = '</p>';
+		$config['first_link'] = 'Premier';
+		$config['first_tag_open'] = '<span>';
+		$config['first_tag_close'] = '</span>';
+		$config['last_link'] = 'Dernier';
+		$config['last_tag_open'] = '<span>';
+		$config['last_tag_close'] = '</span>';
+		$config['next_link'] = 'Suivant';
+		$config['next_tag_open'] = '<span>';
+		$config['next_tag_close'] = '</span>';
+		$config['prev_link'] = 'Précédant';
+		$config['prev_tag_open'] = '<span>';
+		$config['prev_tag_close'] = '</span>';
+		$config['cur_tag_open'] = '<b>';
+		$config['cur_tag_close'] = '</b>';
+$config['attributes']=array('class'=> 'btn btn-sm btn-danger cl');
 $this->pagination->initialize($config);
 
 $data['pages']= $this->pagination->create_links();
 
-$data['services']=$this->s->get_all(0,10);
-
-	
+$data['services']=$this->s->get_all($config['per_page'],$npage);
+$data['css']=$this->css;
+	$data['js']=$this->js;
 		
 
 		$this->load->view('services/index', $data, FALSE);
